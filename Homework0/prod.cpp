@@ -1,14 +1,21 @@
 //  :)
 #include <iostream>
-using std::cout, std::endl, std::cin;
+using std::cout, std::endl, std::cin, std::cerr;
 
-int main() {
-    int a;
-    int b;
+int main(int argc, char *argv[]) {
+    if (argc < 3) {
+        std::cerr << "Please give me 2 arguments" << endl;
+        return 1;
+    }
+    else if (argc >= 3) {
+        std::cerr << "You gave too many arguments" << endl;
+        return 1;
+    }
+    else {
+        int a = atoi(argv[1]);
+        int b = atoi(argv[2]);
+        int product = a * b;
 
-    cout << "Enter a single number: ";
-    cin >> a;
-    cout << "Enter another number: ";
-    cin >> b;
-    cout << "The sum of " << a << " * " << b << " is " << a * b << endl;
+        cout << a << " * " << b << product << endl;
+    }
 }
