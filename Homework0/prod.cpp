@@ -1,21 +1,20 @@
-//  :)
 #include <iostream>
-using std::cout, std::endl, std::cin, std::cerr;
+using std::cout, std::endl, std::cin;
 
-int main(int argc, char *argv[]) {
+
+int main(int argc, char* argv[]) {
+    // Condition to check for 2 numbers and print the error
     if (argc < 3) {
-        std::cerr << "Please give me 2 arguments" << endl;
+        printf("prod requires 2 arguments\n");
+        // cerr << "prod requires 2 arguments" << endl;
         return 1;
     }
-    else if (argc >= 3) {
-        std::cerr << "You gave too many arguments" << endl;
-        return 1;
-    }
-    else {
-        int a = atoi(argv[1]);
-        int b = atoi(argv[2]);
-        int product = a * b;
+    // making floats work for decimal numbers
+    float a = atof(argv[1]);
+    float b = atof(argv[2]);
+    float product = a * b;
 
-        cout << a << " * " << b << product << endl;
-    }
+    // Final display
+    cout << a << " * " << b << " = " << product << endl;
+    return 0;
 }
