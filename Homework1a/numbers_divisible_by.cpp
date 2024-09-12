@@ -7,16 +7,21 @@ int main(int argc, char* argv[]) {
     int end = atoi(argv[2]);
     int divisor = atoi(argv[3]);
 
-    if (argv[1] < argv[2]) {
-        //work on the first starting number being divisible by the divisor
-        for (int i=start*divisor;i<=end;i=i+divisor){
-            cout << i << endl;
+//why does it work when I use start and end but not argv[1] and argv[2]
+//if statement for when the start number is smaller than the end number
+    if (start < end) {
+        for (int i = start; i <= end; i++){
+            if (i % divisor == 0) {
+                cout << i << endl;
+            }
         }
     }
-    // else if (argv[1] > argv[2]) {
-    //     for (int i=start;i>=end;i=i-divisor) {
-    //         cout << i << endl;
-    //     }
-    // }
+    else {
+        for (int i = start; i >= end; i--) {
+            if (i % divisor == 0) {
+                cout << i << endl;
+            }
+        }
+    }
     return 0;
 }
