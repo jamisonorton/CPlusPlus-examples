@@ -1,6 +1,6 @@
 #include <iostream>
-using std::cout, std::endl, std::cin;
-
+using std::cout;
+using std::endl;
 
 int main(int argc, char* argv[]) {
     // Condition to check for 2 numbers and print the error
