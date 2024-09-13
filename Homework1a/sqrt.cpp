@@ -11,7 +11,6 @@ int main(int argc, char* argv[]) {
     double high = n;
     double low = 0;
     double mid = low + (high - low) / 2;
-    // cout << mid << " (" << mid * mid << ")" << endl;
     
     if (high < 0) {
         printf("Input must be greater than 0\n");

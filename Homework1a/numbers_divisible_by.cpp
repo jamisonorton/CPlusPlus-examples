@@ -7,7 +7,6 @@ int main(int argc, char* argv[]) {
     int end = atoi(argv[2]);
     int divisor = atoi(argv[3]);
 
-//why does it work when I use start and end but not argv[1] and argv[2]
     if (start < end) {
         for (int i = start; i <= end; i++){
             if (i % divisor == 0) {
