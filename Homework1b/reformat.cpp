@@ -7,6 +7,8 @@ using std::string;
 #include <fstream>
 using std::ifstream, std::ofstream;
 
-int main () {
-    
+int main (int argc, char *argv[]) {
+    if (argc < 4) {
+
+    }
 }
