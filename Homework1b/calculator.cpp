@@ -1,12 +1,8 @@
 #include <iostream>
-#include <string>
+using std::cout, std::cin, std::getline, std::endl, std::stod;
 
-using std::cout;
-using std::cin;
-using std::getline;
+#include <string>
 using std::string;
-using std::endl;
-using std::stod;
 
 int main() {
     string op;
