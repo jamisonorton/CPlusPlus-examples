@@ -10,52 +10,31 @@ using std::ifstream, std::ofstream;
 #include <sstream>
 using std::stringstream;
 
-// int countWords (string word) {
-//     stringstream word_stream(word);
-//     int total = 0;
-//     int num;
-//     while (word_stream >> num) {
-//         total += num;
-//     }
-//     return total;
-// }
+int countWords (string str) {
+    int c = 0;
 
-// int main (int argc, char *argv[]) {
+    stringstream ss(str);
+    string word;
+    while (ss >> word) {
+        c++;
+    }
+    return c;
+}
 
-//     if (argc < 2) {
-//         cerr << "you need both an input and output file" << endl;
-//         exit(1);
-//         }
-
-//     ifstream infile(argv[1]);
-//     if (!infile.is_open()) {
-//         cerr << "unable to open file" << argv[1] << endl;
-//         exit(2);
-//     }    
-
-//     string line;
-//     while (getline(infile, line)) {
-//         cout << countWords(line) << endl;
-//     }
-
-//     return 0;
-
-//     infile.close();
-// }
-
-int main(int argc, char *argv[]) {
-    string line;
+int main (int argc, char *argv[]) {
     ifstream infile(argv[1]);
-
-    while (getline(infile, line)) {
-        stringstream stream(line);
-        string word;
-        int wordCount = 0;
-
-        while (stream >> word) {
-            ++wordCount;
-        }   
-    cout << wordCount << endl;
+    if (!infile.is_open()) {
+        cerr << "unable to open file" << argv[1] << endl;
+        exit(2);
+    }    
+    else {
+        string line;
+        int c = 0;
+        while (getline(infile, line)) {
+            c++;
+            cout << countWords(line) << endl;
+        }
+        infile.close();
     }
 
     return 0;
