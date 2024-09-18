@@ -6,6 +6,7 @@ using std::cin;
 using std::getline;
 using std::string;
 using std::endl;
+using std::stod;
 
 int main() {
     string op;
@@ -32,8 +33,8 @@ int main() {
             getline(cin, left);
             cout << "right operand: ";
             getline(cin, right);
-            int num1 = stoi(left);
-            int num2 = stoi(right);
+            double num1 = stod(left);
+            double num2 = stod(right);
             cout << num1 + num2 << endl;
             cout << "operation: ";
             getline(cin, op);
@@ -44,8 +45,8 @@ int main() {
             getline(cin, left);
             cout << "right operand: ";
             getline(cin, right);
-            int num1 = stoi(left);
-            int num2 = stoi(right);
+            double num1 = stod(left);
+            double num2 = stod(right);
             cout << num1 - num2 << endl;
             cout << "operation: ";
             getline(cin, op);
@@ -56,8 +57,8 @@ int main() {
             getline(cin, left);
             cout << "right operand: ";
             getline(cin, right);
-            int num1 = stoi(left);
-            int num2 = stoi(right);
+            double num1 = stod(left);
+            double num2 = stod(right);
             cout << num1 * num2 << endl;
             cout << "operation: ";
             getline(cin, op);
@@ -68,8 +69,8 @@ int main() {
             getline(cin, left);
             cout << "right operand: ";
             getline(cin, right);
-            int num1 = stoi(left);
-            int num2 = stoi(right);
+            double num1 = stod(left);
+            double num2 = stod(right);
             cout << num1 / num2 << endl;
             cout << "operation: ";
             getline(cin, op);
