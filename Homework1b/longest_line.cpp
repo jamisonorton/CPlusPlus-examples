@@ -46,6 +46,7 @@ using std::stringstream;
 int main(int argc, char *argv[]) {
     string line;
     ifstream infile(argv[1]);
+
     while (getline(infile, line)) {
         stringstream stream(line);
         string word;
