@@ -6,8 +6,7 @@ using std::string;
 
 int main() {
     string op;
-    string left = "";
-    string right = "";
+    string left, right = "";
     string add = "add";
     string subtract = "subtract";
     string multiply = "multiply";
