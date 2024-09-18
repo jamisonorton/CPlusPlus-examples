@@ -29,11 +29,16 @@ int main (int argc, char *argv[]) {
     }    
     else {
         string line;
-        int c = 0;
+        string longestLine;
+        int maxWordCount = 0;
         while (getline(infile, line)) {
-            c++;
-            cout << countWords(line) << endl;
+            if (maxWordCount < countWords(line)) {
+                maxWordCount = countWords(line);
+                longestLine = line;
+            }
         }
+        cout << longestLine << endl;
+        
         infile.close();
     }
 
