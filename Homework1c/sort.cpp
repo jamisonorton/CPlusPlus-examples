@@ -2,7 +2,9 @@
 #include <string>
 
 void sort(std::string& a, std::string& b, std::string& c) {
-    // implement sort here
+    if (a > b) swap(a, b);
+    if (b > c) swap(b, c);
+    if (a > b) swap (a, b);
 }
 
 int main(int argc, char const* argv[]) {
