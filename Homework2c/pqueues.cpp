@@ -1,11 +1,14 @@
 #include <iostream>
-using std::cout, std::cin, std::cerr, std::getline, std::endl, std::stoi;
+using std::cout, std::cin, std::getline, std::endl, std::stoi;
 
 #include <string>
 using std::string;
 
 #include <queue>
 using std::priority_queue;
+
+#include <iomanip>
+using std::setw, std:: setfill;
 
 #include "input.h"
 
@@ -29,7 +32,7 @@ int main(int argc, char const* argv[]) {
     while (input("What do you want to do? ", action)) {
         if (action == "add") {
             input("Name: ", name);
-            input("Priority ", inputPriority);
+            input("Priority: ", inputPriority);
             priority = stoi(inputPriority);
             queue.push(Person(name, priority));
         }
@@ -38,15 +41,13 @@ int main(int argc, char const* argv[]) {
                 cout << "There are no more people in line" << endl;
             } else {
                 Person next = queue.top();
-                cout << (next.priority < 10 ? "0" : "") << next.priority << " - " << next.name << endl;
+                cout << setw(2) << setfill('0') << next.priority << " - " << next.name << endl;
                 queue.pop();
             }
         }
         else {
-            cerr << action << " isn't a valid operation" << endl;
+            cout << action << " isn't a valid operation" << endl;
         }
-
     }
-
     return 0;
 }
