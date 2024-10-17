@@ -26,7 +26,7 @@ public:
     }
 
     bool remove(T item) {
-        for (auto it = element.begin(); it != elements.end(); ++it) {
+        for (auto it = elements.begin(); it != elements.end(); ++it) {
             if (*it == item) {
                 elements.erase(it);
                 return true;
