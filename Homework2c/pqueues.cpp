@@ -38,7 +38,7 @@ int main(int argc, char const* argv[]) {
                 cout << "There are no more people in line" << endl;
             } else {
                 Person next = queue.top();
-                cout << (next.priority < 10 ? "0" : "") << next.priority << "-" << next.name << endl;
+                cout << (next.priority < 10 ? "0" : "") << next.priority << " - " << next.name << endl;
                 queue.pop();
             }
         }
