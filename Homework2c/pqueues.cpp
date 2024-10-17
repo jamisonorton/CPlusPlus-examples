@@ -9,34 +9,37 @@ using std::priority_queue;
 
 #include "input.h"
 
-struct Person {
+class Person {
+public:
     string name;
     int priority;
+
+    Person(string n, int p) : name(n), priority(p) {}
+
+    bool operator<(const Person& other) const {
+        return priority < other.priority;
+    }
 };
 
 int main(int argc, char const* argv[]) {
-    string action;
-    string name;
-    string inputPriority;
+    string action, name, inputPriority;
     int priority;
-
-    priority_queue<Person> names;
+    priority_queue<Person> queue;
 
     while (input("What do you want to do? ", action)) {
         if (action == "add") {
             input("Name: ", name);
-            input("Priority ", inputPriority) || (priority = stoi(inputPriority));
-            names.push({name, priority});
+            input("Priority ", inputPriority);
+            priority = stoi(inputPriority);
+            queue.push(Person(name, priority));
         }
-
         else if (action == "take") {
-            if (names.empty()) {
+            if (queue.empty()) {
                 cout << "There are no more people in line" << endl;
-            }
-            else {
-                Person next = names.top();
+            } else {
+                Person next = queue.top();
                 cout << (next.priority < 10 ? "0" : "") << next.priority << "-" << next.name << endl;
-                names.pop();
+                queue.pop();
             }
         }
         else {
