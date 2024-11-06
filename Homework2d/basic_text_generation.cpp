@@ -7,11 +7,13 @@
 #include <ctime>
 #include <cstdlib>
 
+using namespace std;
+
 // Function to train the model
-std::unordered_map<std::string, std::vector<std::string>> trainModel(std::istream& in) {
-    std::unordered_map<std::string, std::vector<std::string>> wordMap;
-    std::string prev = "";
-    std::string curr;
+unordered_map<string, vector<string> > trainModel(istream& in) {
+    unordered_map<string, vector<string> > wordMap;
+    string prev = "";
+    string curr;
 
     // Read words from the input stream
     while (in >> curr) {
@@ -23,22 +25,44 @@ std::unordered_map<std::string, std::vector<std::string>> trainModel(std::istrea
 
     return wordMap;
 }
+// Function to generate text
+void generateText(unordered_map<string, vector<string> > wordMap, int numWords, string firstWord, ostream& out) {
+    srand(time(0));
+    for (size_t i = 0; i < numWords; i++) {
+        vector<string> bucket = wordMap[firstWord];
+        string nextWord = bucket[rand() % bucket.size()];
+        out << nextWord << " ";
+        firstWord = nextWord;
+    }
+    out << endl;
+}
 
-int main() {
+int main(int argc, char const* argv[]) {
     // Example input for training
-    std::istringstream sampleText("one fish two fish red fish blue fish");
+    istringstream sampleText("one fish two fish red fish blue fish");
+    string filename;
+    int numWords;
+    string startingWord;
 
-    // Train the model
-    auto wordMap = trainModel(sampleText);
-
-    // Display the contents of the map to check correctness
-    for (const auto& pair : wordMap) {
-        std::cout << pair.first << ": ";
-        for (const auto& word : pair.second) {
-            std::cout << word << " ";
-        }
-        std::cout << std::endl;
+    filename = argv[1];
+    ifstream file(filename);
+    if (!file) {
+        cerr << "ERROR: can't open " << argv[1] << endl;
     }
 
+    numWords = stoi(argv[2]);
+
+    // Train the model
+    auto wordMap = trainModel(file);
+
+    // Display the contents of the map to check correctness
+    // for (const auto& pair : wordMap) {
+    //     cout << pair.first << ": ";
+    //     for (const auto& word : pair.second) {
+    //         cout << word << " ";
+    //     }
+    //     cout << endl;
+    // }
+    generateText(wordMap, numWords, "", cout);
     return 0;
 }
