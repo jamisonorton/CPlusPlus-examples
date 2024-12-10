@@ -1,2 +1,2 @@
-tests: tests.cpp
-	g++ -std=c++17 -Wall -o tests tests.cpp
+maze: maze.cpp
+	g++ -std=c++17 -Wall -o maze maze.cpp
