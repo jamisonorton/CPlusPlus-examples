@@ -1,2 +1,2 @@
-sort: sort.cpp
-	g++ -std=c++17 -Wall -o sort sort.cpp
+tests: tests.cpp
+	g++ -std=c++17 -Wall -o tests tests.cpp
