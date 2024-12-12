@@ -1,6 +1,6 @@
 #pragma once
 
-#include <algorithm> // for std::max
+#include <algorithm>
 
 struct Node {
     Node* left;
@@ -11,79 +11,81 @@ struct Node {
     Node(int v) : left(nullptr), right(nullptr), value(v), height(1) {}
 };
 
-// Helper function to update the height of a node
+// Helper function to get the height of a node
+int get_height(Node* node) {
+    return node ? node->height : 0;
+}
+
+// Function to update the height of a node based on its children
 void update_height(Node* node) {
     if (node) {
-        int left_height = node->left ? node->left->height : 0;
-        int right_height = node->right ? node->right->height : 0;
-        node->height = std::max(left_height, right_height) + 1;
+        node->height = std::max(get_height(node->left), get_height(node->right)) + 1;
     }
 }
 
-// Perform a left rotation
+// Function to perform a left rotation on the tree
 void promote_left(Node*& root) {
-    if (!root || !root->right) return; // No right child to promote
+    if (root == nullptr || root->right == nullptr) {
+        return;  // No need to rotate if root is null or there is no right child
+    }
 
-    Node* new_root = root->right;
-    root->right = new_root->left;
-    new_root->left = root;
+    Node* new_root = root->right;  // The new root will be the right child of the current root
+    root->right = new_root->left;  // The right child's left subtree becomes the old root's right subtree
+    new_root->left = root;  // The old root becomes the left child of the new root
 
-    // Update heights
+    // Update the heights of the nodes after rotation
     update_height(root);
     update_height(new_root);
 
-    // Update root pointer
-    root = new_root;
+    root = new_root;  // Set the new root of the subtree
 }
 
-// Perform a right rotation
+// Function to perform a right rotation on the tree
 void promote_right(Node*& root) {
-    if (!root || !root->left) return; // No left child to promote
+    if (root == nullptr || root->left == nullptr) {
+        return;  // No need to rotate if root is null or there is no left child
+    }
 
-    Node* new_root = root->left;
-    root->left = new_root->right;
-    new_root->right = root;
+    Node* new_root = root->left;  // The new root will be the left child of the current root
+    root->left = new_root->right;  // The left child's right subtree becomes the old root's left subtree
+    new_root->right = root;  // The old root becomes the right child of the new root
 
-    // Update heights
+    // Update the heights of the nodes after rotation
     update_height(root);
     update_height(new_root);
 
-    // Update root pointer
-    root = new_root;
+    root = new_root;  // Set the new root of the subtree
 }
 
-// Rebalance the tree
+// Helper function to get the balance factor of a node
+int get_balance(Node* node) {
+    return get_height(node->left) - get_height(node->right);
+}
+
+// Function to rebalance the tree after insertion or deletion
 void rebalance(Node*& root) {
-    if (!root) return;
+    if (root == nullptr) return;
 
-    // Update the height of the current node
-    update_height(root);
+    // Get the balance factor of the current node
+    int balance = get_balance(root);
 
-    // Calculate the balance factor
-    int left_height = root->left ? root->left->height : 0;
-    int right_height = root->right ? root->right->height : 0;
-    int balance = left_height - right_height;
-
-    // Left-heavy
+    // Left heavy subtree
     if (balance > 1) {
-        int left_child_balance = (root->left->left ? root->left->left->height : 0) - 
-                                 (root->left->right ? root->left->right->height : 0);
-        if (left_child_balance < 0) {
-            // Left-Right case
-            promote_left(root->left);
+        // Left-Right case: Left child is right-heavy
+        if (get_balance(root->left) < 0) {
+            promote_left(root->left);  // Perform a left rotation on the left child
         }
-        // Left-Left case
-        promote_right(root);
+        promote_right(root);  // Perform a right rotation on the root
     }
-    // Right-heavy
+    // Right heavy subtree
     else if (balance < -1) {
-        int right_child_balance = (root->right->left ? root->right->left->height : 0) - 
-                                  (root->right->right ? root->right->right->height : 0);
-        if (right_child_balance > 0) {
-            // Right-Left case
-            promote_right(root->right);
+        // Right-Left case: Right child is left-heavy
+        if (get_balance(root->right) > 0) {
+            promote_right(root->right);  // Perform a right rotation on the right child
         }
-        // Right-Right case
-        promote_left(root);
+        promote_left(root);  // Perform a left rotation on the root
     }
+
+    // Update the height of the root after rebalancing
+    update_height(root);
 }
